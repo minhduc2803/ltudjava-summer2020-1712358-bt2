@@ -1,41 +1,31 @@
-package com.jcg.hibernate.maven;
+package pojo;
 
 /**
- * com.jcg.hibernate.maven
+ * pojo
  *
  * @created by ADMIN - StudentID : 1712358
- * @Date 19/6/2020 - 22:28 PM
+ * @Date 22/6/2020 - 20:57 PM
  * @Description
  */
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "sinhvien")
-public class User {
-
-
-    @Id
-    @Column(name = "MSSV")
+public class SinhVien implements java.io.Serializable{
     private String MSSV;
-
-    @Column(name = "STT")
     private int STT;
-
-    @Column(name = "HoTen")
     private String HoTen;
-
-    @Column(name = "GioiTinh")
     private String GioiTinh;
-
-    @Column(name = "CMND")
     private String CMND;
 
 
+    public SinhVien(){}
+    public SinhVien(String MSSV){
+        this.MSSV = MSSV;
+    }
+    public SinhVien(String MSSV, int STT, String HoTen, String GioiTinh, String CMND){
+        this.MSSV = MSSV;
+        this.STT = STT;
+        this.HoTen = HoTen;
+        this.GioiTinh = GioiTinh;
+        this.CMND = CMND;
+    }
     public String getMSSV() {
         return MSSV;
     }
@@ -76,5 +66,7 @@ public class User {
     public void setCMND(String CMND) {
         this.CMND = CMND;
     }
+
+
 
 }

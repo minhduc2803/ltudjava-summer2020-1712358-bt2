@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="8f11dc5a-ca3f-461b-b743-5db1610a3adb" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,11 +47,17 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.projectsettings.compiler.javacompiler" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.build" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Private\Pro\HK6\Java\Project\ltudjava-summer2020-1712358-bt2\Hibernate\src\main\resources\mapping" />
+      <recent name="D:\Private\Pro\HK6\Java\Project\ltudjava-summer2020-1712358-bt2\Hibernate\src\main\java" />
+    </key>
   </component>
   <component name="RunManager">
-    <configuration name="AppMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.jcg.hibernate.maven.AppMain" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="app.Main" />
       <module name="Hibernate" />
       <extension name="coverage">
         <pattern>
@@ -47,7 +71,7 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.AppMain" />
+        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -64,30 +88,50 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
-    <state x="349" y="0" key="#Project_Structure" timestamp="1592579436699">
+    <state x="349" y="0" key="#Project_Structure" timestamp="1592627257548">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="349" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1592579436699" />
-    <state width="723" height="210" key="GridCell.Tab.0.bottom" timestamp="1592589761271">
+    <state x="349" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1592627257548" />
+    <state x="447" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592840377142">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="723" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592589761271" />
-    <state width="723" height="210" key="GridCell.Tab.0.center" timestamp="1592589761271">
+    <state x="447" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1592840377142" />
+    <state x="722" y="202" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1592840373992">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="723" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592589761271" />
-    <state width="723" height="210" key="GridCell.Tab.0.left" timestamp="1592589761270">
+    <state x="722" y="202" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1592840373992" />
+    <state width="723" height="105" key="GridCell.Tab.0.bottom" timestamp="1592842731884">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="723" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592589761270" />
-    <state width="723" height="210" key="GridCell.Tab.0.right" timestamp="1592589761271">
+    <state width="723" height="105" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1592842731884" />
+    <state width="723" height="105" key="GridCell.Tab.0.center" timestamp="1592842731883">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="723" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592589761271" />
-    <state x="536" y="90" key="SettingsEditor" timestamp="1592589411763">
+    <state width="723" height="105" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1592842731883" />
+    <state width="723" height="105" key="GridCell.Tab.0.left" timestamp="1592842731883">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="536" y="90" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592589411763" />
+    <state width="723" height="105" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1592842731883" />
+    <state width="723" height="105" key="GridCell.Tab.0.right" timestamp="1592842731883">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="723" height="105" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1592842731883" />
+    <state x="245" y="0" key="SettingsEditor" timestamp="1592627914527">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="245" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1592627914527" />
   </component>
 </project>
