@@ -9,19 +9,20 @@ package pojo;
  */
 public class SinhVien implements java.io.Serializable{
     private String MSSV;
-    private int STT;
+    private String MaLop;
     private String HoTen;
     private String GioiTinh;
     private String CMND;
 
 
     public SinhVien(){}
-    public SinhVien(String MSSV){
+    public SinhVien(String MSSV, String MaLop){
         this.MSSV = MSSV;
+        this.MaLop = MaLop;
     }
-    public SinhVien(String MSSV, int STT, String HoTen, String GioiTinh, String CMND){
+    public SinhVien(String MSSV, String MaLop, String HoTen, String GioiTinh, String CMND){
         this.MSSV = MSSV;
-        this.STT = STT;
+        this.MaLop = MaLop;
         this.HoTen = HoTen;
         this.GioiTinh = GioiTinh;
         this.CMND = CMND;
@@ -34,14 +35,13 @@ public class SinhVien implements java.io.Serializable{
         this.MSSV = MSSV;
     }
 
-    public int getSTT() {
-        return STT;
+    public String getMaLop() {
+        return MaLop;
     }
 
-    public void setSTT(int STT) {
-        this.STT = STT;
+    public void setMaLop(String MaLop) {
+        this.MaLop = MaLop;
     }
-
 
     public String getHoTen() {
         return HoTen;

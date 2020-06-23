@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/HibernateMapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog = "hibernate" name="pojo.ThoiKhoaBieu" table="thoikhoabieu">
+        <composite-id>
+            <key-property length="10" name="MSSV"/>
+            <key-property length="10" name="MaMon"/>
+            <key-property length="10" name="MaLop"/>
+        </composite-id>
+
+    </class>
+</hibernate-mapping>

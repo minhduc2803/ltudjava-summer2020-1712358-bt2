@@ -8,8 +8,8 @@
             <generator class="assigned"/>
         </id>
 
-        <property name="STT" type="int">
-            <column name="STT"/>
+        <property name="MaLop" type="string">
+            <column length="10" name="MaLop"/>
         </property>
 
         <property name="HoTen" type="string">
