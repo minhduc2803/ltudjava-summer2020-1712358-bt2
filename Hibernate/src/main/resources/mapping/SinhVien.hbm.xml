@@ -8,9 +8,9 @@
             <generator class="assigned"/>
         </id>
 
-        <property name="MaLop" type="string">
-            <column length="10" name="MaLop"/>
-        </property>
+        <many-to-one class="pojo.LopHoc" name="MaLop" fetch="join" lazy="false" cascade="none">
+            <column length="10" name="MaLop" not-null="true"/>
+        </many-to-one>
 
         <property name="HoTen" type="string">
             <column length="45" name="HoTen"/>

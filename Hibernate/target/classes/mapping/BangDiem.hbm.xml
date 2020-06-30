@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/HibernateMapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog = "hibernate" name="pojo.ThoiKhoaBieu" table="thoikhoabieu">
+        <composite-id>
+            <key-property length="10" name="MSSV"/>
+            <key-property length="10" name="MaMon"/>
+            <key-property length="10" name="MaLop"/>
+        </composite-id>
+
+        <property name="DiemGK" type="float">
+            <column name="DiemGK"/>
+        </property>
+        <property name="DiemCK" type="float">
+            <column name="DiemCK"/>
+        </property>
+        <property name="DiemKhac" type="float">
+            <column name="DiemKhac"/>
+        </property>
+        <property name="DiemTong" type="float">
+            <column name="DiemTong"/>
+        </property>
+
+
+    </class>
+</hibernate-mapping>

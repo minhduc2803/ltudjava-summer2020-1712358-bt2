@@ -7,9 +7,7 @@
             <key-property length="10" name="MaMon"/>
             <key-property length="10" name="MaLop"/>
         </composite-id>
-        <many-to-one class="pojo.LopHoc" name="MaLop" fetch="join" lazy="false" cascade="none">
-            <column length="10" name="MaLop" not-null="true"/>
-        </many-to-one>
+
         <property name="TenMon" type="string">
             <column length="45" name="TenMon"/>
         </property>
