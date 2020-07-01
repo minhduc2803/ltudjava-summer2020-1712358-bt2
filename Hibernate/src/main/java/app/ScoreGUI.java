@@ -1,0 +1,33 @@
+package app;
+
+/**
+ * app
+ *
+ * @created by ADMIN - StudentID : 1712358
+ * @Date 1/7/2020 - 23:40 PM
+ * @Description
+ */
+import javax.swing.*;
+
+public class ScoreGUI extends JPanel {
+    JMenuBar classes;
+    JFileChooser importScore;
+    JTable student;
+
+    ScoreGUI(){
+        setLayout(null);
+
+        classes = new JMenuBar();
+        importScore = new JFileChooser();
+        student = new JTable();
+
+        classes.setBounds(50,100,100,50);
+        importScore.setBounds(600,100,100,50);
+
+        add(classes);
+        add(importScore);
+        add(student);
+        this.setSize(800,600);
+        System.out.println("Score GUI");
+    }
+}

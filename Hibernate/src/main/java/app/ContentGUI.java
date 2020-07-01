@@ -9,8 +9,10 @@ package app;
  * @Description
  */
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class ContentGUI extends JFrame {
+public class ContentGUI extends JFrame implements ActionListener  {
     JPanel sideBarPanel;
     JPanel contentPanel;
 
@@ -19,8 +21,10 @@ public class ContentGUI extends JFrame {
     JButton scheduleButton;
     JButton scoreButton;
 
-    ContentGUI(){
+    ContentGUI() {
         super();
+    }
+    public void initGUI(){
         sideBarPanel = new JPanel(null);
         contentPanel = new JPanel();
         studentButton = new JButton("Sinh Viên");
@@ -36,6 +40,16 @@ public class ContentGUI extends JFrame {
         scheduleButton.setBounds(0,300,200,70);
         scoreButton.setBounds(0,400,200,70);
 
+        studentButton.setName("student");
+        courseButton.setName("course");
+        scheduleButton.setName("schedule");
+        scoreButton.setName("score");
+
+        studentButton.addActionListener(this);
+        courseButton.addActionListener(this);
+        scheduleButton.addActionListener(this);
+        scoreButton.addActionListener(this);
+
         sideBarPanel.setSize(200,600);
         sideBarPanel.add(studentButton);
         sideBarPanel.add(courseButton);
@@ -50,5 +64,17 @@ public class ContentGUI extends JFrame {
 
     public static void main(String[] args){
         ContentGUI content = new ContentGUI();
+        content.initGUI();
+    }
+
+    public void actionPerformed(ActionEvent e){
+        JButton b = (JButton)e.getSource();
+        switch(b.getName()){
+            case "student":
+                
+            case "course":
+            case "schedule":
+            case "score":
+        }
     }
 }
