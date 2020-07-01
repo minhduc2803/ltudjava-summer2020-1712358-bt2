@@ -58,13 +58,25 @@ public class HibarnateGUI extends JFrame {
         DanhSachLopButton.setBounds(100,200,200,150);
         ThoiKhoaBieuButton.setBounds(400,200,200,150);
         BangDiemButton.setBounds(700,200,200,150);
+        JLabel statusLabel = new JLabel("",JLabel.CENTER);
 
+        JFrame T = this;
+        /*
         DanhSachLopButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int returnVal = fileDialog.showOpenDialog(returnThis());
 
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    java.io.File file = fileDialog.getSelectedFile();
+                    statusLabel.setText("File Selected :" + file.getName());
+                } else {
+                    statusLabel.setText("Open command cancelled by user." );
+                }
             }
         });
+
+         */
         ThoiKhoaBieuButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -80,10 +92,31 @@ public class HibarnateGUI extends JFrame {
         panel.add(DanhSachLopButton);
         panel.add(ThoiKhoaBieuButton);
         panel.add(BangDiemButton);
-
+        panel.add(statusLabel);
         return panel;
     }
+    /*
+    public void actionPerformed(ActionEvent evt){
+        String com = evt.getActionCommand();
+        switch(com){
+            case "Import Danh Sách Lớp": {
+                final JFileChooser  fileDialog = new JFileChooser();
+                int returnVal = fileDialog.showOpenDialog(returnThis());
 
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    java.io.File file = fileDialog.getSelectedFile();
+                    this.statusLabel.setText("File Selected :" + file.getName());
+                } else {
+                    this.statusLabel.setText("Open command cancelled by user.");
+                }
+            }
+        }
+    }
+    */
+
+    public JFrame returnThis(){
+        return this;
+    }
     public static void main(String[] args) {
 
         EventQueue.invokeLater(() -> {
