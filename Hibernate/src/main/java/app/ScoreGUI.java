@@ -11,23 +11,24 @@ import javax.swing.*;
 
 public class ScoreGUI extends JPanel {
     JMenuBar classes;
-    JFileChooser importScore;
+    JButton importButton;
     JTable student;
 
     ScoreGUI(){
         setLayout(null);
 
         classes = new JMenuBar();
-        importScore = new JFileChooser();
+        importButton = new JButton("Import");
         student = new JTable();
 
         classes.setBounds(50,100,100,50);
-        importScore.setBounds(600,100,100,50);
+        importButton.setBounds(600,100,100,50);
 
         add(classes);
-        add(importScore);
+        add(importButton);
         add(student);
         this.setSize(800,600);
+        setLocation(200,0);
         System.out.println("Score GUI");
     }
 }

@@ -11,22 +11,23 @@ import javax.swing.*;
 
 public class CourseGUI extends JPanel {
     JMenuBar classes;
-    JFileChooser importCourse;
+    JButton importButton;
     JTable course;
 
     CourseGUI(){
         setLayout(null);
 
         classes = new JMenuBar();
-        importCourse = new JFileChooser();
+        importButton = new JButton("Import");
         course = new JTable();
 
         classes.setBounds(50,100,100,50);
-        importCourse.setBounds(600,100,100,50);
+        importButton.setBounds(600,100,100,50);
 
         this.setSize(800,600);
+        setLocation(200,0);
         add(classes);
-        add(importCourse);
+        add(importButton);
         add(course);
 
         System.out.println("Course GUI");

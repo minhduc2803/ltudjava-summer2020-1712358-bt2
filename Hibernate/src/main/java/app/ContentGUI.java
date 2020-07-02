@@ -9,6 +9,7 @@ package app;
  * @Description
  */
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -51,14 +52,16 @@ public class ContentGUI extends JFrame implements ActionListener  {
         scoreButton.addActionListener(this);
 
         sideBarPanel.setSize(200,600);
+        sideBarPanel.setLocation(0,0);
         sideBarPanel.add(studentButton);
         sideBarPanel.add(courseButton);
         sideBarPanel.add(scheduleButton);
         sideBarPanel.add(scoreButton);
 
-
+        getContentPane().setLayout(null);
         getContentPane().add(sideBarPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setVisible(true);
     }
 
@@ -66,15 +69,53 @@ public class ContentGUI extends JFrame implements ActionListener  {
         ContentGUI content = new ContentGUI();
         content.initGUI();
     }
-
+    public void clearColor(){
+        studentButton.setBackground(Color.WHITE);
+        courseButton.setBackground(Color.WHITE);
+        scheduleButton.setBackground(Color.WHITE);
+        scoreButton.setBackground(Color.WHITE);
+    }
     public void actionPerformed(ActionEvent e){
         JButton b = (JButton)e.getSource();
+        clearColor();
+        b.setBackground(Color.ORANGE);
         switch(b.getName()){
-            case "student":
-                
-            case "course":
-            case "schedule":
-            case "score":
+            case "student": {
+                remove(contentPanel);
+                contentPanel = new StudentGUI();
+                getContentPane().add(contentPanel);
+                revalidate();
+                repaint();
+
+                break;
+            }
+            case "course": {
+                remove(contentPanel);
+                contentPanel = new CourseGUI();
+                getContentPane().add(contentPanel);
+                revalidate();
+                repaint();
+
+                break;
+            }
+            case "schedule": {
+                remove(contentPanel);
+                contentPanel = new ScheduleGUI();
+                getContentPane().add(contentPanel);
+                revalidate();
+                repaint();
+
+                break;
+            }
+            case "score": {
+                remove(contentPanel);
+                contentPanel = new ScoreGUI();
+                getContentPane().add(contentPanel);
+                revalidate();
+                repaint();
+
+                break;
+            }
         }
     }
 }

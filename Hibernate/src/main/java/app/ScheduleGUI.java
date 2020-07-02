@@ -25,6 +25,7 @@ public class ScheduleGUI extends JPanel {
         add(classes);
         add(schedule);
         this.setSize(800,600);
+        setLocation(200,0);
         System.out.println("Schedule GUI");
     }
 }
