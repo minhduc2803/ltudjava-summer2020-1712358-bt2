@@ -9,8 +9,11 @@ package app;
  * @Description
  */
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
-public class StudentGUI extends JPanel {
+public class StudentGUI extends JPanel implements ActionListener {
     JMenuBar classes;
     JButton importButton;
     JTable student;
@@ -22,6 +25,7 @@ public class StudentGUI extends JPanel {
         importButton = new JButton("Import");
         student = new JTable();
 
+        importButton.addActionListener(this);
         classes.setBounds(50,100,100,50);
         importButton.setBounds(600,100,100,50);
 
@@ -33,20 +37,16 @@ public class StudentGUI extends JPanel {
         setVisible(true);
         System.out.println("Student GUI");
     }
-    public static void main(String[] args){
-        JFrame j =  new JFrame();
-        j.setSize(1000,700);
-        j.setLocation(200,200);
+    public void importStudent(){
+        JFileChooser chooser = new JFileChooser("D:\\Private\\Pro\\HK6\\Java\\Project\\DanhSachLop");
+        if(chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
+            File f = chooser.getSelectedFile();
+            System.out.println(f.getName());
+        }else{
 
-        j.getContentPane().setLayout(null);
-
-        j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        j.setVisible(true);
-        StudentGUI s = new StudentGUI();
-
-        j.getContentPane().add(s);
-        j.revalidate();
-        j.repaint();
-
+        }
+    }
+    public void actionPerformed(ActionEvent e) {
+        importStudent();
     }
 }
