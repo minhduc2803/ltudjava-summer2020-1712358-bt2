@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/HibernateMapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class catalog = "hibernate" name="pojo.ThoiKhoaBieu" table="thoikhoabieu">
+    <class catalog = "hibernate" name="pojo.BangDiem" table="bangdiem">
         <composite-id>
             <key-property length="10" name="MSSV"/>
             <key-property length="10" name="MaMon"/>

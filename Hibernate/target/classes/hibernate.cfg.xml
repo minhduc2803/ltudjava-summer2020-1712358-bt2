@@ -20,5 +20,9 @@
 
         <!-- Mapping With Model Class Containing Annotations -->
         <mapping resource="mapping/SinhVien.hbm.xml" />
+        <mapping resource="mapping/LopHoc.hbm.xml" />
+        <mapping resource="mapping/MonHoc.hbm.xml" />
+        <mapping resource="mapping/ThoiKhoaBieu.hbm.xml" />
+        <mapping resource="mapping/BangDiem.hbm.xml" />
     </session-factory>
 </hibernate-configuration>

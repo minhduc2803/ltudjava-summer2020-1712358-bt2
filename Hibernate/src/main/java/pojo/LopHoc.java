@@ -7,6 +7,7 @@ package pojo;
  * @Date 23/6/2020 - 11:08 AM
  * @Description
  */
+
 public class LopHoc implements java.io.Serializable{
     private String MaLop;
 

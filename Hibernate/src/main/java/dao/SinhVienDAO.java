@@ -15,6 +15,9 @@ import org.hibernate.Transaction;
 import pojo.SinhVien;
 import util.HibernateUtil;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.List;
 
 public class SinhVienDAO {
@@ -99,5 +102,36 @@ public class SinhVienDAO {
             session.close();
         }
         return true;
+    }
+    public static int importSinhVien(File f){
+        int numberOfSinhVien = 0;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(f));
+            String firstLine = br.readLine().trim();
+            System.out.println(firstLine);
+            String line = "";
+            while((line = br.readLine()) != null){
+                String[] elements = line.split(",");
+
+
+                String filename = f.getName();
+                String lophocName = filename.substring(0,filename.length()-4);
+
+                SinhVien sv = new SinhVien(elements[1].trim(),lophocName,elements[2].trim(),elements[3].trim(),elements[4].trim());
+                boolean result = addSinhVien(sv);
+                if(result) {
+                    numberOfSinhVien++;
+                    System.out.println("Thêm sinh viên thành công");
+                }else
+                {
+                    System.out.println("Thêm sinh viên thất bại");
+
+                }
+                System.out.println(line);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return numberOfSinhVien;
     }
 }

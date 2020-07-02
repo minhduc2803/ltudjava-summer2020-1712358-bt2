@@ -8,6 +8,9 @@ package app;
  * @Date 1/7/2020 - 18:16 PM
  * @Description
  */
+import dao.LopHocDAO;
+import dao.SinhVienDAO;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,7 +44,9 @@ public class StudentGUI extends JPanel implements ActionListener {
         JFileChooser chooser = new JFileChooser("D:\\Private\\Pro\\HK6\\Java\\Project\\DanhSachLop");
         if(chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
             File f = chooser.getSelectedFile();
-            System.out.println(f.getName());
+
+            LopHocDAO.importLopHoc(f);
+            SinhVienDAO.importSinhVien(f);
         }else{
 
         }

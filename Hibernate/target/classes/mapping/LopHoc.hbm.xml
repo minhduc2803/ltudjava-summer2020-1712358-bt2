@@ -5,7 +5,6 @@
     <class catalog = "hibernate" name="pojo.LopHoc" table="lophoc">
         <id name="MaLop"  type="string">
             <column length="10" name="MaLop"/>
-            <generator class="assigned"/>
         </id>
     </class>
 </hibernate-mapping>

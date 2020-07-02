@@ -14,6 +14,7 @@ import org.hibernate.Transaction;
 import pojo.LopHoc;
 import util.HibernateUtil;
 
+import java.io.File;
 import java.util.List;
 
 public class LopHocDAO {
@@ -80,23 +81,31 @@ public class LopHocDAO {
         }
         return true;
     }
-    public static boolean deleteLopHoc(String MaLop){
+    public static boolean deleteLopHoc(String MaLop) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         LopHoc lh = LopHocDAO.getLopHoc(MaLop);
-        if(lh == null){
+        if (lh == null) {
             return false;
         }
         Transaction transaction = null;
-        try{
+        try {
             transaction = session.beginTransaction();
             session.delete(lh);
             transaction.commit();
-        }catch (Exception ex){
+        } catch (Exception ex) {
             transaction.rollback();
             System.err.println(ex);
-        }finally {
+        } finally {
             session.close();
         }
         return true;
+    }
+    public static void importLopHoc(File f){
+        LopHocDAO lophocdao = new LopHocDAO();
+        String filename = f.getName();
+        String lophocName = filename.substring(0,filename.length()-4);
+        System.out.println("Tên lớp học: "+lophocName);
+        LopHoc lophoc = new LopHoc(lophocName);
+        lophocdao.addLopHoc(lophoc);
     }
 }

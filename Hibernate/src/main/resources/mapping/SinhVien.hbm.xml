@@ -5,12 +5,11 @@
     <class catalog = "hibernate" name="pojo.SinhVien" table="sinhvien">
         <id name="MSSV" type="string">
             <column length="10" name="MSSV"/>
-            <generator class="assigned"/>
         </id>
 
-        <many-to-one class="pojo.LopHoc" name="MaLop" fetch="join" lazy="false" cascade="none">
-            <column length="10" name="MaLop" not-null="true"/>
-        </many-to-one>
+        <property name="MaLop" type="string">
+            <column length="10" name="MaLop"/>
+        </property>
 
         <property name="HoTen" type="string">
             <column length="45" name="HoTen"/>
