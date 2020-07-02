@@ -8,37 +8,40 @@ package pojo;
  * @Description
  */
 public class MonHoc implements java.io.Serializable{
-    private String MaMon;
-    private String MaLop;
+    private MonHocID ID;
     private String TenMon;
     private String PhongHoc;
 
     public MonHoc(){}
-    public MonHoc(String MaMon, String MaLop){
-        this.MaMon = MaMon;
-        this.MaLop = MaLop;
+    public MonHoc(MonHocID ID){
+        this.ID = ID;
     }
     public MonHoc(String MaMon, String MaLop, String TenMon, String PhongHoc){
-        this.MaMon = MaMon;
-        this.MaLop = MaLop;
+        this.ID = new MonHocID(MaMon,MaLop);
         this.TenMon = TenMon;
         this.PhongHoc = PhongHoc;
     }
 
+    public MonHocID getMonHocID(){
+        return ID;
+    }
+    public void setMonHocID(MonHocID ID){
+        this.ID = ID;
+    }
     public String getMaMon() {
-        return MaMon;
+        return ID.MaMon;
     }
 
     public void setMaMon(String MaMon) {
-        this.MaMon = MaMon;
+        this.ID.MaMon = MaMon;
     }
 
     public String getMaLop() {
-        return MaLop;
+        return ID.MaLop;
     }
 
     public void setMaLop(String MaLop) {
-        this.MaLop = MaLop;
+        this.ID.MaLop = MaLop;
     }
 
     public String getTenMon() {

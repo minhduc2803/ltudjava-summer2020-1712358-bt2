@@ -8,39 +8,42 @@ package pojo;
  * @Description
  */
 public class ThoiKhoaBieu implements java.io.Serializable{
-    private String MSSV;
-    private String MaLop;
-    private String MaMon;
-
+    private ThoiKhoaBieuID ID;
     public ThoiKhoaBieu(){}
-
+    public ThoiKhoaBieu(ThoiKhoaBieuID ID){
+        this.ID = ID;
+    }
     public ThoiKhoaBieu(String MSSV, String MaLop, String MaMon){
-        this.MSSV = MSSV;
-        this.MaLop = MaLop;
-        this.MaMon = MaMon;
+        this.ID.MSSV = MSSV;
+        this.ID.MaLop = MaLop;
+        this.ID.MaMon = MaMon;
+    }
+    public ThoiKhoaBieuID getID(){ return ID;}
+    public void setID(ThoiKhoaBieuID ID){
+        this.ID = ID;
     }
     public String getMSSV() {
-        return MSSV;
+        return ID.MSSV;
     }
 
     public void setMSSV(String MSSV) {
-        this.MSSV = MSSV;
+        this.ID.MSSV = MSSV;
     }
 
     public String getMaMon() {
-        return MaMon;
+        return ID.MaMon;
     }
 
     public void setMaMon(String MaMon) {
-        this.MaMon = MaMon;
+        this.ID.MaMon = MaMon;
     }
 
     public String getMaLop() {
-        return MaLop;
+        return ID.MaLop;
     }
 
     public void setMaLop(String MaLop) {
-        this.MaLop = MaLop;
+        this.ID.MaLop = MaLop;
     }
 
 }

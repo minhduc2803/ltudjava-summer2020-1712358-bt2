@@ -12,8 +12,13 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import pojo.MonHoc;
+import pojo.MonHocID;
+import pojo.SinhVien;
 import util.HibernateUtil;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.util.List;
 
 public class MonHocDAO {
@@ -32,11 +37,11 @@ public class MonHocDAO {
         }
         return ds;
     }
-    public static MonHoc getMonHoc(String MaMon){
+    public static MonHoc getMonHoc(MonHocID ID){
         MonHoc mh  = null;
         Session session = HibernateUtil.getSessionFactory().openSession();
         try{
-            mh = (MonHoc) session.get(MonHoc.class, MaMon);
+            mh = (MonHoc) session.get(MonHoc.class, ID);
         }catch (Exception ex){
             System.err.println(ex);
         }finally {
@@ -46,7 +51,7 @@ public class MonHocDAO {
     }
     public static boolean addMonHoc(MonHoc mh){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if(MonHocDAO.getMonHoc(mh.getMaMon()) != null){
+        if(MonHocDAO.getMonHoc(mh.getMonHocID()) != null){
             return false;
         }
         Transaction transaction = null;
@@ -64,7 +69,7 @@ public class MonHocDAO {
     }
     public static boolean updateMonHoc(MonHoc mh){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if(MonHocDAO.getMonHoc(mh.getMaMon()) == null){
+        if(MonHocDAO.getMonHoc(mh.getMonHocID()) == null){
             return false;
         }
         Transaction transaction = null;
@@ -80,9 +85,9 @@ public class MonHocDAO {
         }
         return true;
     }
-    public static boolean deleteMonHoc(String MaMon){
+    public static boolean deleteMonHoc(MonHocID ID){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        MonHoc mh = MonHocDAO.getMonHoc(MaMon);
+        MonHoc mh = MonHocDAO.getMonHoc(ID);
         if(mh == null){
             return false;
         }
@@ -98,5 +103,37 @@ public class MonHocDAO {
             session.close();
         }
         return true;
+    }
+    public static int importCourse(File f){
+        int numberOfCourse = 0;
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(f));
+            String firstLine = br.readLine().trim();
+            System.out.println(firstLine);
+            String line = "";
+            while((line = br.readLine()) != null){
+                String[] elements = line.split(",");
+
+
+                String filename = f.getName();
+                String lophocName = filename.substring(0,filename.length()-4);
+
+                MonHoc mh = new MonHoc(elements[1].trim(),lophocName,elements[2].trim(),elements[3].trim());
+                boolean result = addMonHoc(mh);
+                if(result) {
+                    numberOfCourse++;
+                    System.out.println("Thêm môn học thành công");
+                }else
+                {
+                    System.out.println("Thêm môn học thất bại");
+
+                }
+                System.out.println(line);
+            }
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        return numberOfCourse;
     }
 }

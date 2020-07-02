@@ -7,9 +7,18 @@ package app;
  * @Date 1/7/2020 - 23:39 PM
  * @Description
  */
-import javax.swing.*;
+import dao.LopHocDAO;
+import dao.MonHocDAO;
+import dao.SinhVienDAO;
+import dao.ThoiKhoaBieuDAO;
+import pojo.ThoiKhoaBieuID;
 
-public class CourseGUI extends JPanel {
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+public class CourseGUI extends JPanel implements ActionListener {
     JMenuBar classes;
     JButton importButton;
     JTable course;
@@ -21,6 +30,8 @@ public class CourseGUI extends JPanel {
         importButton = new JButton("Import");
         course = new JTable();
 
+        importButton.addActionListener(this);
+
         classes.setBounds(50,100,100,50);
         importButton.setBounds(600,100,100,50);
 
@@ -31,5 +42,19 @@ public class CourseGUI extends JPanel {
         add(course);
 
         System.out.println("Course GUI");
+    }
+    public void importCourse(){
+        JFileChooser chooser = new JFileChooser("D:\\Private\\Pro\\HK6\\Java\\Project\\ThoiKhoaBieu");
+        if(chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
+            File f = chooser.getSelectedFile();
+
+            MonHocDAO.importCourse(f);
+            ThoiKhoaBieuDAO.importThoiKhoaBieu();
+        }else{
+
+        }
+    }
+    public void actionPerformed(ActionEvent e){
+        importCourse();
     }
 }
