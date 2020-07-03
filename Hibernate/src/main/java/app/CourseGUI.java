@@ -103,7 +103,7 @@ public class CourseGUI extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         switch(command){
-            case "import":
+            case "Import":
                 importCourse();
                 break;
             default: {

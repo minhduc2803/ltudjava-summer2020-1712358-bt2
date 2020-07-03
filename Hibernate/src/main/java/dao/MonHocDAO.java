@@ -23,12 +23,22 @@ import java.util.List;
 
 public class MonHocDAO {
     public static List<MonHoc> getListMonHoc() {
-        List<MonHoc> ds = null;
+        List<MonHoc> ds = new ArrayList<>();
         Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            String hql = "select mh from MonHoc mh";
-            Query query = session.createQuery(hql);
-            ds = query.list();
+            List resultWithAliasedBean = session.createSQLQuery(
+                    "select MaMon, MaLop, TenMon, PhongHoc from monhoc")
+                    .addScalar("MaMon")
+                    .addScalar("MaLop")
+                    .addScalar("TenMon")
+                    .addScalar("PhongHoc")
+                    .setResultTransformer( Transformers.aliasToBean(MonHocID.class))
+                    .list();
+
+            for(Object r:resultWithAliasedBean) {
+                MonHocID mh = (MonHocID)r;
+                ds.add(new MonHoc(mh.getMaMon(),mh.getMaLop(),mh.getTenMon(),mh.getPhongHoc()));
+            }
         } catch (HibernateException ex) {
             //Log the exception
             System.err.println(ex);
@@ -47,11 +57,12 @@ public class MonHocDAO {
                     .addScalar("MaLop")
                     .addScalar("TenMon")
                     .addScalar("PhongHoc")
-                    .setResultTransformer( Transformers.aliasToBean(MonHoc.class))
+                    .setResultTransformer( Transformers.aliasToBean(MonHocID.class))
                     .list();
 
             for(Object r:resultWithAliasedBean) {
-                ds.add((MonHoc) r);
+                MonHocID mh = (MonHocID)r;
+                ds.add(new MonHoc(mh.getMaMon(),mh.getMaLop(),mh.getTenMon(),mh.getPhongHoc()));
             }
         } catch (HibernateException ex) {
             //Log the exception
@@ -62,16 +73,29 @@ public class MonHocDAO {
         return ds;
     }
     public static MonHoc getMonHoc(MonHocID ID){
-        MonHoc mh  = null;
+        List<MonHoc> ds = new ArrayList<>();
         Session session = HibernateUtil.getSessionFactory().openSession();
-        try{
-            mh = (MonHoc) session.get(MonHoc.class, ID);
-        }catch (Exception ex){
+        try {
+            List resultWithAliasedBean = session.createSQLQuery(
+                    "select MaMon, MaLop, TenMon, PhongHoc from monhoc where MaLop = \""+ID.MaLop+"\" and MaMon = \""+ID.MaMon+"\"")
+                    .addScalar("MaMon")
+                    .addScalar("MaLop")
+                    .addScalar("TenMon")
+                    .addScalar("PhongHoc")
+                    .setResultTransformer( Transformers.aliasToBean(MonHocID.class))
+                    .list();
+
+            for(Object r:resultWithAliasedBean) {
+                MonHocID mh = (MonHocID)r;
+                ds.add(new MonHoc(mh.getMaMon(),mh.getMaLop(),mh.getTenMon(),mh.getPhongHoc()));
+            }
+        } catch (HibernateException ex) {
+            //Log the exception
             System.err.println(ex);
-        }finally {
+        } finally {
             session.close();
         }
-        return mh;
+        return ds.get(0);
     }
     public static boolean addMonHoc(MonHoc mh){
         Session session = HibernateUtil.getSessionFactory().openSession();

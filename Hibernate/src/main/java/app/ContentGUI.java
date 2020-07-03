@@ -35,8 +35,9 @@ public class ContentGUI extends JFrame implements ActionListener  {
 
         studentButton.setBackground(Color.ORANGE);
 
-        setSize(1000,700);
-        setLocation(200,200);
+        setSize(1050,700);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 
         studentButton.setBounds(0,100,200,70);
         courseButton.setBounds(0,200,200,70);

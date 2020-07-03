@@ -59,29 +59,7 @@ public class ThoiKhoaBieuDAO {
         }
         return ds;
     }
-    public static List<ThoiKhoaBieu> getThoiKhoaBieuTheoLop(String MaLop){
-        List<ThoiKhoaBieu> ds = new ArrayList<>();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            List resultWithAliasedBean = session.createSQLQuery(
-                    "select MaMon, TenMon, PhongHoc from thoikhoabieu where MaLop = \""+MaLop+"\"")
-                    .addScalar("MaMon")
-                    .addScalar("TenMon")
-                    .addScalar("PhongHoc")
-                    .setResultTransformer( Transformers.aliasToBean(ThoiKhoaBieuID.class))
-                    .list();
 
-            for(Object r:resultWithAliasedBean) {
-                ds.add(new ThoiKhoaBieu((ThoiKhoaBieuID) r));
-            }
-        } catch (HibernateException ex) {
-            //Log the exception
-            System.err.println(ex);
-        } finally {
-            session.close();
-        }
-        return ds;
-    }
     public static ThoiKhoaBieu getThoiKhoaBieu(ThoiKhoaBieuID ID){
         ThoiKhoaBieu tkb  = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

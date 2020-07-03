@@ -15,6 +15,7 @@ import pojo.SinhVien;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.desktop.SystemEventListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -27,7 +28,8 @@ public class StudentGUI extends JPanel implements ActionListener {
     JTable student;
     JScrollPane studentScroll;
     DefaultTableModel data;
-
+    String MaLop="";
+    JButton addStudent;
     StudentGUI(){
         setLayout(null);
 
@@ -35,17 +37,21 @@ public class StudentGUI extends JPanel implements ActionListener {
         importButton = new JButton("Import");
         student = new JTable();
         studentScroll =  new JScrollPane(student);
+        addStudent = new JButton("Thêm Sinh Viên");
 
         importButton.addActionListener(this);
+        addStudent.addActionListener(this);
 
         classes.setBounds(50,100,100,50);
-        importButton.setBounds(600,100,100,50);
+        importButton.setBounds(660,100,150,50);
         studentScroll.setBounds(50,200,600,400);
+        addStudent.setBounds(660,200,150,50);
 
         add(classes);
         add(importButton);
         add(studentScroll);
-        this.setSize(800,600);
+        add(addStudent);
+        this.setSize(900,600);
         setLocation(200,0);
         setVisible(true);
         System.out.println("Student GUI");
@@ -58,6 +64,7 @@ public class StudentGUI extends JPanel implements ActionListener {
 
             LopHocDAO.importLopHoc(f);
             SinhVienDAO.importSinhVien(f);
+            setupDanhSach();
         }else{
 
         }
@@ -81,29 +88,70 @@ public class StudentGUI extends JPanel implements ActionListener {
 
     }
     public void setupTable(String MaLop){
+        this.MaLop = MaLop;
         oneClass.setText(MaLop);
         List<SinhVien> ds = SinhVienDAO.getSinhVienTheoLop(MaLop);
-        String[][] vectorData = new String[ds.size()][6];
-        String[] columnNames = {"STT", "MSSV", "Mã Lớp", "Họ Tên", "Giới Tính", "CMND"};
+        String[][] vectorData = new String[ds.size()][5];
+        String[] columnNames = {"STT", "MSSV", "Họ Tên", "Giới Tính", "CMND"};
         for (int i = 1; i <= ds.size(); i++) {
             SinhVien sv = ds.get(i - 1);
             vectorData[i - 1][0] = String.valueOf(i);
             vectorData[i - 1][1] = sv.getMSSV();
-            vectorData[i - 1][2] = sv.getMaLop();
-            vectorData[i - 1][3] = sv.getHoTen();
-            vectorData[i - 1][4] = sv.getGioiTinh();
-            vectorData[i - 1][5] = sv.getCMND();
+            vectorData[i - 1][2] = sv.getHoTen();
+            vectorData[i - 1][3] = sv.getGioiTinh();
+            vectorData[i - 1][4] = sv.getCMND();
         }
         data = new DefaultTableModel(vectorData, columnNames);
         this.student.setModel(data);
 
 
     }
+    public boolean addStudent(){
+        String MSSV = "",HoTen="",GioiTinh="",CMND="";
+        JTextField MSSVField = new JTextField(20);
+        JTextField HoTenField = new JTextField(20);
+        JTextField CMNDField = new JTextField(20);
+        JPanel myPanel = new JPanel();
+
+        myPanel.add(new JLabel("MSSV:"));
+        myPanel.add(MSSVField);
+        myPanel.add(Box.createHorizontalStrut(15)); // a spacer
+        myPanel.add(new JLabel("Họ tên:"));
+        myPanel.add(HoTenField);
+        myPanel.add(Box.createHorizontalStrut(15));
+        myPanel.add(new JLabel("CMND:"));
+        myPanel.add(CMNDField);
+
+        int result = JOptionPane.showConfirmDialog(null, myPanel,
+                "Nhập thông tin sinh viên", JOptionPane.OK_CANCEL_OPTION);
+        if (result == JOptionPane.OK_OPTION) {
+            System.out.println(MSSVField.getText()+" "+HoTenField.getText()+" "+CMNDField.getText());
+            MSSV = MSSVField.getText();
+            HoTen = HoTenField.getText();
+            CMND = CMNDField.getText();
+            if(!this.MaLop.equals("") && !MSSV.equals("")){
+                SinhVien sv = new SinhVien(MSSV, MaLop,HoTen,GioiTinh,CMND);
+                if(SinhVienDAO.addSinhVien(sv)){
+                    JOptionPane.showConfirmDialog(this,"Thêm Sinh Viên thành công","Thông báo",JOptionPane.CLOSED_OPTION);
+                }
+                else
+                {
+                    JOptionPane.showConfirmDialog(this,"Thêm Sinh Viên thất bại","Thông báo",JOptionPane.CLOSED_OPTION);
+                }
+                setupTable(this.MaLop);
+            }
+        }
+
+        return true;
+    }
     public void actionPerformed(ActionEvent e) {
         String command = e.getActionCommand();
         switch(command){
-            case "import":
+            case "Import":
                 importStudent();
+                break;
+            case "Thêm Sinh Viên":
+                addStudent();
                 break;
             default: {
                 setupTable(command);

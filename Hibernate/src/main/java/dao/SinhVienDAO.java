@@ -65,6 +65,36 @@ public class SinhVienDAO {
         }
         return ds;
     }
+    public static List<SinhVien> getSinhVienTheoLopTheoMon(String MaLop, String MaMon){
+        List<SinhVien> ds = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List resultWithAliasedBean = session.createSQLQuery(
+                    "select sinhvien.MSSV as MSSV, sinhvien.MaLop as MaLop, sinhvien.HoTen as HoTen, sinhvien.GioiTinh as GioiTinh, sinhvien.CMND as CMND " +
+                       "from " +
+                       "thoikhoabieu " +
+                       "inner join sinhvien " +
+                       "on thoikhoabieu.mssv = sinhvien.mssv " +
+                       "where thoikhoabieu.malop = \""+MaLop+"\" and thoikhoabieu.mamon = \""+MaMon+"\"")
+                    .addScalar("MSSV")
+                    .addScalar("MaLop")
+                    .addScalar("HoTen")
+                    .addScalar("GioiTinh")
+                    .addScalar("CMND")
+                    .setResultTransformer( Transformers.aliasToBean(SinhVien.class))
+                    .list();
+
+            for(Object r:resultWithAliasedBean) {
+                ds.add((SinhVien) r);
+            }
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
     public static SinhVien getSinhVien(String MSSV){
         SinhVien sv  = null;
         Session session = HibernateUtil.getSessionFactory().openSession();

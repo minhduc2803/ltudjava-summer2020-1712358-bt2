@@ -28,6 +28,7 @@ public class MonHoc implements java.io.Serializable{
     public void setMonHocID(MonHocID ID){
         this.ID = ID;
     }
+
     public String getMaMon() {
         return ID.MaMon;
     }
