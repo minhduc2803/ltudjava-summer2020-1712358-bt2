@@ -12,12 +12,16 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.transform.Transformers;
 import pojo.SinhVien;
+import pojo.ThoiKhoaBieu;
+import pojo.ThoiKhoaBieuID;
 import util.HibernateUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SinhVienDAO {
@@ -28,6 +32,31 @@ public class SinhVienDAO {
             String hql = "select sv from SinhVien sv";
             Query query = session.createQuery(hql);
             ds = query.list();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
+    public static List<SinhVien> getSinhVienTheoLop(String MaLop){
+        List<SinhVien> ds = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List resultWithAliasedBean = session.createSQLQuery(
+                    "select MSSV, MaLop, HoTen, GioiTinh, CMND from sinhvien where MaLop = \""+MaLop+"\"")
+                    .addScalar("MSSV")
+                    .addScalar("MaLop")
+                    .addScalar("HoTen")
+                    .addScalar("GioiTinh")
+                    .addScalar("CMND")
+                    .setResultTransformer( Transformers.aliasToBean(SinhVien.class))
+                    .list();
+
+            for(Object r:resultWithAliasedBean) {
+                ds.add((SinhVien) r);
+            }
         } catch (HibernateException ex) {
             //Log the exception
             System.err.println(ex);

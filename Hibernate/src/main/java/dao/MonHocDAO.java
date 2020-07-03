@@ -11,14 +11,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import pojo.MonHoc;
-import pojo.MonHocID;
-import pojo.SinhVien;
+import org.hibernate.transform.Transformers;
+import pojo.*;
 import util.HibernateUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MonHocDAO {
@@ -29,6 +29,30 @@ public class MonHocDAO {
             String hql = "select mh from MonHoc mh";
             Query query = session.createQuery(hql);
             ds = query.list();
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
+    public static List<MonHoc> getMonHocTheoLop(String MaLop){
+        List<MonHoc> ds = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List resultWithAliasedBean = session.createSQLQuery(
+                    "select MaMon, MaLop, TenMon, PhongHoc from monhoc where MaLop = \""+MaLop+"\"")
+                    .addScalar("MaMon")
+                    .addScalar("MaLop")
+                    .addScalar("TenMon")
+                    .addScalar("PhongHoc")
+                    .setResultTransformer( Transformers.aliasToBean(MonHoc.class))
+                    .list();
+
+            for(Object r:resultWithAliasedBean) {
+                ds.add((MonHoc) r);
+            }
         } catch (HibernateException ex) {
             //Log the exception
             System.err.println(ex);

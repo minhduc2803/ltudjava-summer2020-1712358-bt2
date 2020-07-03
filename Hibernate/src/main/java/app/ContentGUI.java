@@ -27,11 +27,13 @@ public class ContentGUI extends JFrame implements ActionListener  {
     }
     public void initGUI(){
         sideBarPanel = new JPanel(null);
-        contentPanel = new JPanel();
+        contentPanel = new StudentGUI();
         studentButton = new JButton("Sinh Viên");
         courseButton = new JButton("Lớp học");
         scheduleButton = new JButton("Thời khóa biểu");
         scoreButton = new JButton("Điểm số");
+
+        studentButton.setBackground(Color.ORANGE);
 
         setSize(1000,700);
         setLocation(200,200);
@@ -60,6 +62,7 @@ public class ContentGUI extends JFrame implements ActionListener  {
 
         getContentPane().setLayout(null);
         getContentPane().add(sideBarPanel);
+        getContentPane().add(contentPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         setVisible(true);
