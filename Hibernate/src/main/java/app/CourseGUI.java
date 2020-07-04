@@ -42,10 +42,10 @@ public class CourseGUI extends JPanel implements ActionListener {
 
 
         classes.setBounds(50,100,100,50);
-        importButton.setBounds(600,100,100,50);
+        importButton.setBounds(660,100,150,50);
         courseScroll.setBounds(50,200,600,400);
 
-        this.setSize(800,600);
+        this.setSize(900,600);
         setLocation(200,0);
         add(classes);
         add(importButton);

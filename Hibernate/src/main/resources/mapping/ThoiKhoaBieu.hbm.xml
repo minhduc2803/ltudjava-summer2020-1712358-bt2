@@ -4,9 +4,9 @@
 <hibernate-mapping>
     <class catalog = "hibernate" name="pojo.ThoiKhoaBieu" table="thoikhoabieu">
         <composite-id>
-            <key-property length="10" name="MSSV"/>
-            <key-property length="10" name="MaMon"/>
-            <key-property length="10" name="MaLop"/>
+            <key-property length="10" type="string" name="MSSV"/>
+            <key-property length="10" type="string" name="MaMon"/>
+            <key-property length="10" type="string" name="MaLop"/>
         </composite-id>
 
     </class>

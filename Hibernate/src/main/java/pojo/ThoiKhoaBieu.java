@@ -9,11 +9,14 @@ package pojo;
  */
 public class ThoiKhoaBieu implements java.io.Serializable{
     private ThoiKhoaBieuID ID;
-    public ThoiKhoaBieu(){}
+    public ThoiKhoaBieu(){
+        this.ID = new ThoiKhoaBieuID();
+    }
     public ThoiKhoaBieu(ThoiKhoaBieuID ID){
         this.ID = ID;
     }
     public ThoiKhoaBieu(String MSSV, String MaLop, String MaMon){
+        this.ID = new ThoiKhoaBieuID();
         this.ID.MSSV = MSSV;
         this.ID.MaLop = MaLop;
         this.ID.MaMon = MaMon;

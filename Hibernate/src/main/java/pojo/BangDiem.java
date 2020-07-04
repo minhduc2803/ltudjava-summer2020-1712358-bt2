@@ -16,7 +16,9 @@ public class BangDiem implements java.io.Serializable{
     private float DiemKhac;
     private float DiemTong;
 
-    public BangDiem(){}
+    public BangDiem(){
+
+    }
 
     public BangDiem(String MSSV, String MaLop, String MaMon){
         this.MSSV = MSSV;

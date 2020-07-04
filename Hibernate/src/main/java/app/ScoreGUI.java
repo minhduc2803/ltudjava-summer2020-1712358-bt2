@@ -22,12 +22,12 @@ public class ScoreGUI extends JPanel {
         student = new JTable();
 
         classes.setBounds(50,100,100,50);
-        importButton.setBounds(600,100,100,50);
+        importButton.setBounds(660,100,150,50);
 
         add(classes);
         add(importButton);
         add(student);
-        this.setSize(800,600);
+        this.setSize(900,600);
         setLocation(200,0);
         System.out.println("Score GUI");
     }

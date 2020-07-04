@@ -12,7 +12,9 @@ public class MonHoc implements java.io.Serializable{
     private String TenMon;
     private String PhongHoc;
 
-    public MonHoc(){}
+    public MonHoc(){
+        ID = new MonHocID();
+    }
     public MonHoc(MonHocID ID){
         this.ID = ID;
     }

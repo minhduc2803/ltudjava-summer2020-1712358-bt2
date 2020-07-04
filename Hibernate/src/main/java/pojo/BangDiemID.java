@@ -8,7 +8,13 @@ package pojo;
  * @Description
  */
 public class BangDiemID {
-    private String MSSV;
-    private String MaLop;
-    private String MaMon;
+    public String MSSV;
+    public String MaLop;
+    public String MaMon;
+    public BangDiemID(){}
+    public BangDiemID(String MSSV, String MaLop, String MaMon){
+        this.MSSV = MSSV;
+        this.MaLop = MaLop;
+        this.MaMon = MaMon;
+    }
 }
