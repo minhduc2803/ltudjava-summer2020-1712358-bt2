@@ -22,5 +22,9 @@
         <property name="CMND" type="string">
             <column length="15" name="CMND"/>
         </property>
+
+        <property name="password" type="string">
+            <column length="45" name="password"/>
+        </property>
     </class>
 </hibernate-mapping>

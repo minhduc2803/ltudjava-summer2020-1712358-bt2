@@ -21,18 +21,17 @@ public class ContentGUI extends JFrame implements ActionListener  {
     JButton courseButton;
     JButton scheduleButton;
     JButton scoreButton;
+    JButton logoutButton;
 
     ContentGUI() {
         super();
-    }
-    public void initGUI(){
         sideBarPanel = new JPanel(null);
         contentPanel = new StudentGUI();
         studentButton = new JButton("Sinh Viên");
         courseButton = new JButton("Lớp học");
         scheduleButton = new JButton("Thời khóa biểu");
         scoreButton = new JButton("Điểm số");
-
+        logoutButton = new JButton("Đăng xuất");
         studentButton.setBackground(Color.ORANGE);
 
         setSize(1050,700);
@@ -43,16 +42,19 @@ public class ContentGUI extends JFrame implements ActionListener  {
         courseButton.setBounds(0,200,200,70);
         scheduleButton.setBounds(0,300,200,70);
         scoreButton.setBounds(0,400,200,70);
+        logoutButton.setBounds(0,500,200,70);
 
         studentButton.setName("student");
         courseButton.setName("course");
         scheduleButton.setName("schedule");
         scoreButton.setName("score");
+        logoutButton.setName("logout");
 
         studentButton.addActionListener(this);
         courseButton.addActionListener(this);
         scheduleButton.addActionListener(this);
         scoreButton.addActionListener(this);
+        logoutButton.addActionListener(this);
 
         sideBarPanel.setSize(200,600);
         sideBarPanel.setLocation(0,0);
@@ -60,6 +62,7 @@ public class ContentGUI extends JFrame implements ActionListener  {
         sideBarPanel.add(courseButton);
         sideBarPanel.add(scheduleButton);
         sideBarPanel.add(scoreButton);
+        sideBarPanel.add(logoutButton);
 
         getContentPane().setLayout(null);
         getContentPane().add(sideBarPanel);
@@ -71,13 +74,13 @@ public class ContentGUI extends JFrame implements ActionListener  {
 
     public static void main(String[] args){
         ContentGUI content = new ContentGUI();
-        content.initGUI();
     }
     public void clearColor(){
         studentButton.setBackground(Color.WHITE);
         courseButton.setBackground(Color.WHITE);
         scheduleButton.setBackground(Color.WHITE);
         scoreButton.setBackground(Color.WHITE);
+        logoutButton.setBackground(Color.WHITE);
     }
     public void actionPerformed(ActionEvent e){
         JButton b = (JButton)e.getSource();
@@ -120,6 +123,13 @@ public class ContentGUI extends JFrame implements ActionListener  {
 
                 break;
             }
+            case "logout": {
+                dispose();
+                LoginGUI login = new LoginGUI();
+
+                break;
+            }
+
         }
     }
 }

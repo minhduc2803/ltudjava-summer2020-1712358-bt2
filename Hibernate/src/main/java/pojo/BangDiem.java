@@ -8,56 +8,71 @@ package pojo;
  * @Description
  */
 public class BangDiem implements java.io.Serializable{
-    private String MSSV;
-    private String MaLop;
-    private String MaMon;
+    private BangDiemID ID;
+    private String HoTen;
     private float DiemGK;
     private float DiemCK;
     private float DiemKhac;
     private float DiemTong;
 
     public BangDiem(){
-
+        ID = new BangDiemID();
     }
 
-    public BangDiem(String MSSV, String MaLop, String MaMon){
-        this.MSSV = MSSV;
-        this.MaLop = MaLop;
-        this.MaMon = MaMon;
+    public BangDiem(BangDiemID ID){
+        this.ID = ID;
     }
-    public BangDiem(String MSSV, String MaLop, String MaMon, float DiemGK, float DiemCK, float DiemKhac, float DiemTong ){
-        this.MSSV = MSSV;
-        this.MaLop = MaLop;
-        this.MaMon = MaMon;
+    public BangDiem(String MSSV, String HoTen, String MaLop, String MaMon, float DiemGK, float DiemCK, float DiemKhac, float DiemTong ){
+        this.ID = new BangDiemID();
+        this.ID.MSSV = MSSV;
+        this.HoTen = HoTen;
+        this.ID.MaLop = MaLop;
+        this.ID.MaMon = MaMon;
         this.DiemGK = DiemGK;
         this.DiemCK = DiemCK;
         this.DiemKhac = DiemKhac;
         this.DiemTong = DiemTong;
     }
 
+    public BangDiemID getID() {
+        return ID;
+    }
+
+    public void setID(String MSSV) {
+        this.ID = ID;
+    }
+
 
     public String getMSSV() {
-        return MSSV;
+        return ID.MSSV;
     }
 
     public void setMSSV(String MSSV) {
-        this.MSSV = MSSV;
+        this.ID.MSSV = MSSV;
+    }
+
+    public String getHoTen() {
+        return HoTen;
+    }
+
+    public void setHoTen(String HoTen) {
+        this.HoTen = HoTen;
     }
 
     public String getMaMon() {
-        return MaMon;
+        return ID.MaMon;
     }
 
     public void setMaMon(String MaMon) {
-        this.MaMon = MaMon;
+        this.ID.MaMon = MaMon;
     }
 
     public String getMaLop() {
-        return MaLop;
+        return ID.MaLop;
     }
 
     public void setMaLop(String MaLop) {
-        this.MaLop = MaLop;
+        this.ID.MaLop = MaLop;
     }
 
     public float getDiemGK() {

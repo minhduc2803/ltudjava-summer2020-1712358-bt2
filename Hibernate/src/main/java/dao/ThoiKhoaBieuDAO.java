@@ -117,7 +117,13 @@ public class ThoiKhoaBieuDAO {
         Transaction transaction = null;
         try{
             transaction = session.beginTransaction();
-            session.delete(tkb);
+            String hql = "delete from ThoiKhoaBieu where MSSV= :mssv AND MaLop= :malop AND MaMon= :mamon";
+            Query query = session.createQuery(hql);
+            query.setString("mssv",ID.getMSSV());
+            query.setString("malop",ID.getMaLop());
+            query.setString("mamon",ID.getMaMon());
+            System.out.println(query.executeUpdate());
+            //session.delete(tkb);
             transaction.commit();
         }catch (Exception ex){
             transaction.rollback();

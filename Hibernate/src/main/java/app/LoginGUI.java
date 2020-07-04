@@ -59,7 +59,8 @@ public class LoginGUI extends JFrame {
                 String name = usernameText.getText();
                 String pass = String.valueOf(passwordText.getPassword());
                 if(name.equals("giaovu") && pass.equals("giaovu")){
-                    System.out.println("OK");
+
+                    ContentGUI content = new ContentGUI();
                     dispose();
                 }
                 else

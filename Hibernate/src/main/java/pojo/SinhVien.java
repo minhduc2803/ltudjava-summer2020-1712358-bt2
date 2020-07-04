@@ -13,6 +13,7 @@ public class SinhVien implements java.io.Serializable{
     private String HoTen;
     private String GioiTinh;
     private String CMND;
+    private String password;
 
 
     public SinhVien(){}
@@ -26,6 +27,7 @@ public class SinhVien implements java.io.Serializable{
         this.HoTen = HoTen;
         this.GioiTinh = GioiTinh;
         this.CMND = CMND;
+        this.password = MSSV;
     }
     public String getMSSV() {
         return MSSV;
@@ -67,6 +69,13 @@ public class SinhVien implements java.io.Serializable{
         this.CMND = CMND;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 
 }

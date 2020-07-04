@@ -7,7 +7,7 @@ package pojo;
  * @Date 30/6/2020 - 22:02 PM
  * @Description
  */
-public class BangDiemID {
+public class BangDiemID implements java.io.Serializable{
     public String MSSV;
     public String MaLop;
     public String MaMon;
