@@ -18,9 +18,8 @@ import pojo.ThoiKhoaBieu;
 import pojo.ThoiKhoaBieuID;
 import util.HibernateUtil;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -165,7 +164,8 @@ public class SinhVienDAO {
     public static int importSinhVien(File f){
         int numberOfSinhVien = 0;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(f));
+            //BufferedReader br = new BufferedReader(new FileReader(f));
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f.getCanonicalFile()), StandardCharsets.UTF_8));
             String firstLine = br.readLine().trim();
             System.out.println(firstLine);
             String line = "";

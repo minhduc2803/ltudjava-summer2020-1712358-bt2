@@ -15,9 +15,8 @@ import org.hibernate.transform.Transformers;
 import pojo.*;
 import util.HibernateUtil;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,7 +148,8 @@ public class BangDiemDAO {
     public static int importBangDiem(File f){
         int numberOfBangDiem = 0;
         try {
-            BufferedReader br = new BufferedReader(new FileReader(f));
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(f.getCanonicalFile()), StandardCharsets.UTF_8));
+
             String firstLine = br.readLine().trim();
             System.out.println(firstLine);
             String line = "";
