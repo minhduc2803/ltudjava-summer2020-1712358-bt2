@@ -9,6 +9,7 @@ package dao;
  * @Description
  */
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import pojo.GiaoVu;
 import pojo.SinhVien;
 import util.HibernateUtil;
@@ -25,5 +26,23 @@ public class GiaoVuDAO {
             session.close();
         }
         return gv;
+    }
+    public static boolean updateGiaoVu(GiaoVu gv){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Transaction transaction = null;
+        try{
+            session.beginTransaction();
+            String sql = String.format("UPDATE giaovu set password='%s' where username='%s';",gv.getPassword(),gv.getUsername());
+            session.createSQLQuery(sql).executeUpdate();
+            session.getTransaction().commit();
+            //transaction.commit();
+        }catch (Exception ex){
+            //transaction.rollback();
+            System.err.println(ex);
+        }finally {
+            session.close();
+        }
+        return true;
     }
 }

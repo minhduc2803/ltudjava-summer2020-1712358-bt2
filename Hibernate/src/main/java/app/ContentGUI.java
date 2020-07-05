@@ -14,6 +14,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ContentGUI extends JFrame implements ActionListener  {
+    String Username;
+    String Password;
+
     JPanel sideBarPanel;
     JPanel contentPanel;
 
@@ -24,8 +27,11 @@ public class ContentGUI extends JFrame implements ActionListener  {
     JButton logoutButton;
     JButton passwordButton;
 
-    ContentGUI() {
+    ContentGUI(String Username, String Password) {
         super();
+        this.Username = Username;
+        this.Password = Password;
+
         sideBarPanel = new JPanel(null);
         contentPanel = new StudentGUI();
         studentButton = new JButton("Sinh Viên");
@@ -79,7 +85,7 @@ public class ContentGUI extends JFrame implements ActionListener  {
     }
 
     public static void main(String[] args){
-        ContentGUI content = new ContentGUI();
+        ContentGUI content = new ContentGUI("giaovu","giaovu");
     }
     public void clearColor(){
         studentButton.setBackground(Color.WHITE);
@@ -136,9 +142,14 @@ public class ContentGUI extends JFrame implements ActionListener  {
 
                 break;
             }
-            case "changepassword":
-
+            case "changepassword": {
+                remove(contentPanel);
+                contentPanel = new PasswordGUI(Username);
+                getContentPane().add(contentPanel);
+                revalidate();
+                repaint();
                 break;
+            }
         }
     }
 }

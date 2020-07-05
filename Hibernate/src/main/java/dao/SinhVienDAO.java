@@ -127,16 +127,16 @@ public class SinhVienDAO {
     }
     public static boolean updateSinhVien(SinhVien sv){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if(SinhVienDAO.getSinhVien(sv.getMSSV()) == null){
-            return false;
-        }
+
         Transaction transaction = null;
         try{
-            transaction = session.beginTransaction();
-            session.update(sv);
-            transaction.commit();
+            session.beginTransaction();
+            String sql = String.format("UPDATE giaovu set password='%s' where mssv='%s';",sv.getPassword(),sv.getMSSV());
+            session.createSQLQuery(sql).executeUpdate();
+            session.getTransaction().commit();
+            //transaction.commit();
         }catch (Exception ex){
-            transaction.rollback();
+            //transaction.rollback();
             System.err.println(ex);
         }finally {
             session.close();
