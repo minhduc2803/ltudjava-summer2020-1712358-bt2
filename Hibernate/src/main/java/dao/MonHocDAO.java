@@ -99,16 +99,16 @@ public class MonHocDAO {
     }
     public static boolean addMonHoc(MonHoc mh){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        if(MonHocDAO.getMonHoc(mh.getMonHocID()) != null){
-            return false;
-        }
+
         Transaction transaction = null;
         try{
-            transaction = session.beginTransaction();
-            session.save(mh);
-            transaction.commit();
-        }catch(Exception ex){
-            transaction.rollback();
+            session.beginTransaction();
+            String sql = String.format("INSERT INTO monhoc(mamon,malop,tenmon,phonghoc) values('%s','%s','%s','%s');",mh.getMaMon(),mh.getMaLop(),mh.getTenMon(),mh.getPhongHoc());
+            session.createSQLQuery(sql).executeUpdate();
+            session.getTransaction().commit();
+            //transaction.commit();
+        }catch (Exception ex){
+            //transaction.rollback();
             System.err.println(ex);
         }finally {
             session.close();

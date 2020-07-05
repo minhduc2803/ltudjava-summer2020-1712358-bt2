@@ -131,7 +131,7 @@ public class SinhVienDAO {
         Transaction transaction = null;
         try{
             session.beginTransaction();
-            String sql = String.format("UPDATE giaovu set password='%s' where mssv='%s';",sv.getPassword(),sv.getMSSV());
+            String sql = String.format("UPDATE sinhvien set password='%s' where mssv='%s';",sv.getPassword(),sv.getMSSV());
             session.createSQLQuery(sql).executeUpdate();
             session.getTransaction().commit();
             //transaction.commit();

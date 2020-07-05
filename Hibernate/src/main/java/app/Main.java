@@ -14,10 +14,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-
-        SinhVien sv = SinhVienDAO.getSinhVien("1742001");
-        if(sv != null){
-            System.out.println("hello: "+sv.getHoTen());
-        }
+        LoginGUI login = new LoginGUI();
     }
 }

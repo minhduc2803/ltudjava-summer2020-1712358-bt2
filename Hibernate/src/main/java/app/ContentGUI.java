@@ -129,7 +129,7 @@ public class ContentGUI extends JFrame implements ActionListener  {
             }
             case "score": {
                 remove(contentPanel);
-                contentPanel = new ScoreGUI();
+                contentPanel = new ScoreGUI(Username);
                 getContentPane().add(contentPanel);
                 revalidate();
                 repaint();

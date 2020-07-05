@@ -34,11 +34,13 @@ public class ScoreGUI extends JPanel implements ActionListener {
     DefaultTableModel data;
     String MaLop="";
     String MaMon="";
+    String Username;
 
     JLabel pass,fail,passrate,failrate;
 
-    ScoreGUI(){
+    ScoreGUI(String Username){
         setLayout(null);
+        this.Username = Username;
 
         classes = new JMenuBar();
         importButton = new JButton("Import");
@@ -80,8 +82,10 @@ public class ScoreGUI extends JPanel implements ActionListener {
         this.setSize(900,600);
         setLocation(200,0);
         System.out.println("Score GUI");
-
-        setupDanhSach();
+        if(Username.equals("giaovu"))
+            setupDanhSach();
+        else
+            setupOneStudent();
     }
     public boolean importScore(){
         JFileChooser chooser = new JFileChooser("D:\\Private\\Pro\\HK6\\Java\\Project\\BangDiem");
@@ -100,6 +104,8 @@ public class ScoreGUI extends JPanel implements ActionListener {
         if(ds.size() != 0)
         {
             String name = ds.get(0).getMaLop()+"-"+ds.get(0).getMaMon();
+            if(oneClass != null)
+                classes.remove(oneClass);
             oneClass = new JMenu(name);
 
             JMenuItem m;
@@ -117,6 +123,8 @@ public class ScoreGUI extends JPanel implements ActionListener {
         MaLop = malopmamon[0];
         MaMon = malopmamon[1];
         oneClass.setText(MaLopMaMon);
+        this.revalidate();
+        this.repaint();
         nameCourse.setText(MonHocDAO.getMonHoc(new MonHocID(MaMon, MaLop)).getTenMon());
         List<BangDiem> ds = BangDiemDAO.getBangDiemTheoLopTheoMon(MaLop,MaMon);
         String[][] vectorData = new String[ds.size()][8];
@@ -168,17 +176,89 @@ public class ScoreGUI extends JPanel implements ActionListener {
         BangDiemDAO.updateBangDiem(bd);
         setupTable(MaLop+"-"+MaMon);
     }
+    public void setupOneStudent(){
+        List<MonHoc> ds = MonHocDAO.getListMonHoc();
+        if(ds.size() != 0)
+        {
+            String name = ds.get(0).getMaLop()+"-"+ds.get(0).getMaMon();
+            oneClass = new JMenu(name);
+
+            JMenuItem m;
+            for(MonHoc mh:ds){
+                m = new JMenuItem(mh.getMaLop()+"-"+mh.getMaMon());
+                m.addActionListener(this);
+                oneClass.add(m);
+            }
+            classes.add(oneClass);
+            setupTableOneStudent(ds.get(0).getMaLop()+"-"+ds.get(0).getMaMon());
+        }
+    }
+    public void setupTableOneStudent(String MaLopMaMon){
+        String[] malopmamon = MaLopMaMon.split("-",2);
+        MaLop = malopmamon[0];
+        MaMon = malopmamon[1];
+        oneClass.setText(MaLopMaMon);
+        nameCourse.setText(MonHocDAO.getMonHoc(new MonHocID(MaMon, MaLop)).getTenMon());
+        List<BangDiem> ds = BangDiemDAO.getBangDiemTheoLopTheoMonTheoSinhVien(Username,MaLop,MaMon);
+        String[][] vectorData = new String[ds.size()][8];
+        String[] columnNames = {"STT", "MSSV", "Họ Tên", "Điểm GK", "Điểm CK", "Điểm Khác","Điểm Tổng","Kết quả"};
+        float p = 0;
+        float pRate = 0;
+        for (int i = 1; i <= ds.size(); i++) {
+            BangDiem bd = ds.get(i - 1);
+            vectorData[i - 1][0] = String.valueOf(i);
+            vectorData[i - 1][1] = bd.getMSSV();
+            vectorData[i - 1][2] = bd.getHoTen();
+            vectorData[i - 1][3] = String.valueOf(bd.getDiemGK());
+            vectorData[i - 1][4] = String.valueOf(bd.getDiemCK());
+            vectorData[i - 1][5] = String.valueOf(bd.getDiemKhac());
+            vectorData[i - 1][6] = String.valueOf(bd.getDiemTong());
+
+            if(bd.getDiemTong() >= 5.0) {
+                vectorData[i - 1][7] = "Đậu";
+                p+=1;
+
+            }else
+                vectorData[i - 1][7] = "Rớt";
+        }
+        if(ds.size()!=0) {
+            pRate = p / ds.size();
+            pass.setText("Đậu: "+String.valueOf((int)p));
+            fail.setText("Rớt: "+String.valueOf((int)(ds.size()-p)));
+            passrate.setText("Tỉ lệ đậu: "+String.valueOf((int)(pRate*100))+"%");
+            failrate.setText("Tỉ lệ rớt: "+String.valueOf((int)(100-pRate*100))+"%");
+        }
+
+        data = new DefaultTableModel(vectorData, columnNames);
+        this.student.setModel(data);
+    }
     public void actionPerformed(ActionEvent e) {
-        String command = e.getActionCommand();
-        switch(command){
-            case "Import":
-                importScore();
-                break;
-            case "Sửa điểm":
-                submitChange();
-                break;
-            default: {
-                setupTable(command);
+        if(Username.equals("giaovu")) {
+            String command = e.getActionCommand();
+            switch (command) {
+                case "Import":
+                    importScore();
+                    break;
+                case "Sửa điểm":
+                    submitChange();
+                    break;
+                default: {
+                    setupTable(command);
+                }
+            }
+        }
+        else{
+            String command = e.getActionCommand();
+            switch (command) {
+                case "Import":
+
+                    break;
+                case "Sửa điểm":
+
+                    break;
+                default: {
+                    setupTableOneStudent(command);
+                }
             }
         }
     }

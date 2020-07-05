@@ -75,7 +75,37 @@ public class BangDiemDAO {
                     "select MSSV, HoTen, DiemGK, DiemCK, DiemKhac, DiemTong "+
                     "from "+
                     "bangdiem "+
-                    "where malop= \""+MaLop+"\" and mamon = \""+MaMon+"\"")
+                    "where malop= \""+MaLop+"\" and mamon = \""+MaMon+"\";")
+                    .addScalar("MSSV")
+                    .addScalar("HoTen")
+                    .addScalar("DiemGK")
+                    .addScalar("DiemCK")
+                    .addScalar("DiemKhac")
+                    .addScalar("DiemTong")
+                    .setResultTransformer( Transformers.aliasToBean(BangDiemID.class))
+                    .list();
+
+            for(Object r:resultWithAliasedBean) {
+                BangDiemID bd = (BangDiemID)r;
+                ds.add(new BangDiem(bd.getMSSV(),bd.getHoTen(),bd.getMaLop(),bd.getMaMon(),bd.getDiemGK(),bd.getDiemCK(),bd.getDiemKhac(),bd.getDiemTong()));
+            }
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
+    public static List<BangDiem> getBangDiemTheoLopTheoMonTheoSinhVien(String MSSV,String MaLop, String MaMon){
+        List<BangDiem> ds = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List resultWithAliasedBean = session.createSQLQuery(
+                    "select MSSV, HoTen, DiemGK, DiemCK, DiemKhac, DiemTong "+
+                            "from "+
+                            "bangdiem "+
+                            "where mssv = \""+MSSV+"\" and malop= \""+MaLop+"\" and mamon = \""+MaMon+"\";")
                     .addScalar("MSSV")
                     .addScalar("HoTen")
                     .addScalar("DiemGK")

@@ -73,7 +73,8 @@ public class StudentGUI extends JPanel implements ActionListener {
         List<LopHoc> ds = LopHocDAO.getListLopHoc();
         if(ds.size() != 0)
         {
-
+            if(oneClass != null)
+                classes.remove(oneClass);
             oneClass = new JMenu(ds.get(0).getMaLop());
             JMenuItem m;
             for(LopHoc lh:ds){
@@ -82,6 +83,7 @@ public class StudentGUI extends JPanel implements ActionListener {
                 m.addActionListener(this);
                 oneClass.add(m);
             }
+
             classes.add(oneClass);
             setupTable(ds.get(0).getMaLop());
         }
@@ -89,7 +91,9 @@ public class StudentGUI extends JPanel implements ActionListener {
     }
     public void setupTable(String MaLop){
         this.MaLop = MaLop;
-        oneClass.setText(MaLop);
+        oneClass.setText(this.MaLop);
+        this.revalidate();
+        this.repaint();
         List<SinhVien> ds = SinhVienDAO.getSinhVienTheoLop(MaLop);
         String[][] vectorData = new String[ds.size()][5];
         String[] columnNames = {"STT", "MSSV", "Họ Tên", "Giới Tính", "CMND"};

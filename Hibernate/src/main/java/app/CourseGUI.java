@@ -61,6 +61,7 @@ public class CourseGUI extends JPanel implements ActionListener {
 
             MonHocDAO.importCourse(f);
             ThoiKhoaBieuDAO.importThoiKhoaBieu();
+            setupDanhSach();
         }else{
 
         }
@@ -69,7 +70,8 @@ public class CourseGUI extends JPanel implements ActionListener {
         List<LopHoc> ds = LopHocDAO.getListLopHoc();
         if(ds.size() != 0)
         {
-
+            if(oneClass != null)
+                classes.remove(oneClass);
             oneClass = new JMenu(ds.get(0).getMaLop());
             JMenuItem m;
             for(LopHoc lh:ds){
@@ -85,6 +87,8 @@ public class CourseGUI extends JPanel implements ActionListener {
     }
     public void setupTable(String MaLop){
         oneClass.setText(MaLop);
+        this.revalidate();
+        this.repaint();
         List<MonHoc> ds = MonHocDAO.getMonHocTheoLop(MaLop);
         String[][] vectorData = new String[ds.size()][5];
         String[] columnNames = {"STT", "Mã môn","Tên môn","Phòng học"};
@@ -93,7 +97,7 @@ public class CourseGUI extends JPanel implements ActionListener {
             vectorData[i - 1][0] = String.valueOf(i);
             vectorData[i - 1][1] = mh.getMaMon();
             vectorData[i - 1][2] = mh.getTenMon();
-            vectorData[i - 1][2] = mh.getPhongHoc();
+            vectorData[i - 1][3] = mh.getPhongHoc();
         }
         data = new DefaultTableModel(vectorData, columnNames);
         this.course.setModel(data);
