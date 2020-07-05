@@ -42,10 +42,10 @@ public class StudentGUI extends JPanel implements ActionListener {
         importButton.addActionListener(this);
         addStudent.addActionListener(this);
 
-        classes.setBounds(50,100,100,50);
-        importButton.setBounds(660,100,150,50);
-        studentScroll.setBounds(50,200,600,400);
-        addStudent.setBounds(660,200,150,50);
+        classes.setBounds(50,10,100,50);
+        importButton.setBounds(660,10,150,50);
+        studentScroll.setBounds(50,110,600,400);
+        addStudent.setBounds(660,110,150,50);
 
         add(classes);
         add(importButton);

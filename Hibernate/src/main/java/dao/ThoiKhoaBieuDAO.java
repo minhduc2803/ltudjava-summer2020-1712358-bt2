@@ -110,23 +110,16 @@ public class ThoiKhoaBieuDAO {
     }
     public static boolean deleteThoiKhoaBieu(ThoiKhoaBieuID ID){
         Session session = HibernateUtil.getSessionFactory().openSession();
-        ThoiKhoaBieu tkb = ThoiKhoaBieuDAO.getThoiKhoaBieu(ID);
-        if(tkb == null){
-            return false;
-        }
+
         Transaction transaction = null;
         try{
-            transaction = session.beginTransaction();
-            String hql = "delete from ThoiKhoaBieu where MSSV= :mssv AND MaLop= :malop AND MaMon= :mamon";
-            Query query = session.createQuery(hql);
-            query.setString("mssv",ID.getMSSV());
-            query.setString("malop",ID.getMaLop());
-            query.setString("mamon",ID.getMaMon());
-            System.out.println(query.executeUpdate());
-            //session.delete(tkb);
-            transaction.commit();
+            session.beginTransaction();
+            String sql = String.format("DELETE FROM thoikhoabieu where mssv='%s' and malop='%s' and mamon='%s';",ID.getMSSV(),ID.getMaLop(),ID.getMaMon());
+            session.createSQLQuery(sql).executeUpdate();
+            session.getTransaction().commit();
+            //transaction.commit();
         }catch (Exception ex){
-            transaction.rollback();
+            //transaction.rollback();
             System.err.println(ex);
         }finally {
             session.close();

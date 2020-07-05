@@ -9,6 +9,9 @@
             <key-property length="10" name="MaLop"/>
         </composite-id>
 
+        <property name="HoTen" type="string">
+            <column length="45" name="HoTen"/>
+        </property>
         <property name="DiemGK" type="float">
             <column name="DiemGK"/>
         </property>

@@ -43,11 +43,11 @@ public class ScheduleGUI extends JPanel implements ActionListener {
         addStudent.addActionListener(this);
         removeStudent.addActionListener(this);
 
-        studentScroll.setBounds(50,200,600,400);
-        classes.setBounds(50,100,100,50);
-        nameCourse.setBounds(200,100,400,50);
-        addStudent.setBounds(660,200,150,50);
-        removeStudent.setBounds(660,300,150,50);
+        studentScroll.setBounds(50,110,600,400);
+        classes.setBounds(50,10,100,50);
+        nameCourse.setBounds(200,10,400,50);
+        addStudent.setBounds(660,110,150,50);
+        removeStudent.setBounds(660,210,150,50);
 
         add(nameCourse);
         add(classes);
@@ -204,7 +204,7 @@ public class ScheduleGUI extends JPanel implements ActionListener {
                     JOptionPane.showConfirmDialog(this,"Xóa Sinh Viên thất bại","Thông báo",JOptionPane.CLOSED_OPTION);
                 }
             }
-
+            setupTable(MaLop+"-"+MaMon);
         }
         else{
             JOptionPane.showConfirmDialog(this,"Click vào một hàng để chọn sinh viên cần xóa","Thông báo",JOptionPane.CLOSED_OPTION);

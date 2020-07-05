@@ -11,12 +11,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.transform.Transformers;
 import pojo.*;
 import util.HibernateUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BangDiemDAO {
@@ -65,6 +67,55 @@ public class BangDiemDAO {
         }
         return true;
     }
+    public static List<BangDiem> getBangDiemTheoLopTheoMon(String MaLop, String MaMon){
+        List<BangDiem> ds = new ArrayList<>();
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List resultWithAliasedBean = session.createSQLQuery(
+                    "select MSSV, HoTen, DiemGK, DiemCK, DiemKhac, DiemTong "+
+                    "from "+
+                    "bangdiem "+
+                    "where malop= \""+MaLop+"\" and mamon = \""+MaMon+"\"")
+                    .addScalar("MSSV")
+                    .addScalar("HoTen")
+                    .addScalar("DiemGK")
+                    .addScalar("DiemCK")
+                    .addScalar("DiemKhac")
+                    .addScalar("DiemTong")
+                    .setResultTransformer( Transformers.aliasToBean(BangDiemID.class))
+                    .list();
+
+            for(Object r:resultWithAliasedBean) {
+                BangDiemID bd = (BangDiemID)r;
+                ds.add(new BangDiem(bd.getMSSV(),bd.getHoTen(),bd.getMaLop(),bd.getMaMon(),bd.getDiemGK(),bd.getDiemCK(),bd.getDiemKhac(),bd.getDiemTong()));
+            }
+        } catch (HibernateException ex) {
+            //Log the exception
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
+    public static boolean updateBangDiem(BangDiem bd){
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        Transaction transaction = null;
+        try{
+            session.beginTransaction();
+            String sql = String.format("UPDATE bangdiem set diemgk=%f, diemck=%f, diemkhac=%f, diemtong=%f where mssv='%s' and malop='%s' and mamon='%s';",bd.getDiemGK(),bd.getDiemCK(),bd.getDiemKhac(),bd.getDiemTong(),bd.getMSSV(),bd.getMaLop(),bd.getMaMon());
+            session.createSQLQuery(sql).executeUpdate();
+            session.getTransaction().commit();
+            //transaction.commit();
+        }catch (Exception ex){
+            //transaction.rollback();
+            System.err.println(ex);
+        }finally {
+            session.close();
+        }
+        return true;
+    }
     public static int importBangDiem(File f){
         int numberOfBangDiem = 0;
         try {
@@ -84,7 +135,7 @@ public class BangDiemDAO {
                 float DiemCK = Float.valueOf(elements[4]);
                 float DiemKhac = Float.valueOf(elements[5]);
                 float DiemTong = Float.valueOf(elements[6]);
-                BangDiem bd = new BangDiem(elements[1].trim(),MaLop,MaMon,elements[2].trim(),DiemGK,DiemCK,DiemKhac,DiemTong);
+                BangDiem bd = new BangDiem(elements[1].trim(),elements[2].trim(),MaLop,MaMon,DiemGK,DiemCK,DiemKhac,DiemTong);
                 boolean result = addBangDiem(bd);
                 if(result) {
                     numberOfBangDiem++;

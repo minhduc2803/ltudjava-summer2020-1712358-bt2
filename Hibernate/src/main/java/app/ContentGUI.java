@@ -22,6 +22,7 @@ public class ContentGUI extends JFrame implements ActionListener  {
     JButton scheduleButton;
     JButton scoreButton;
     JButton logoutButton;
+    JButton passwordButton;
 
     ContentGUI() {
         super();
@@ -32,29 +33,33 @@ public class ContentGUI extends JFrame implements ActionListener  {
         scheduleButton = new JButton("Thời khóa biểu");
         scoreButton = new JButton("Điểm số");
         logoutButton = new JButton("Đăng xuất");
+        passwordButton = new JButton("Đổi mật khẩu");
         studentButton.setBackground(Color.ORANGE);
 
         setSize(1050,700);
         Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
 
-        studentButton.setBounds(0,100,200,70);
-        courseButton.setBounds(0,200,200,70);
-        scheduleButton.setBounds(0,300,200,70);
-        scoreButton.setBounds(0,400,200,70);
-        logoutButton.setBounds(0,500,200,70);
+        studentButton.setBounds(0,10,200,70);
+        courseButton.setBounds(0,110,200,70);
+        scheduleButton.setBounds(0,210,200,70);
+        scoreButton.setBounds(0,310,200,70);
+        passwordButton.setBounds(0,410,200,70);
+        logoutButton.setBounds(0,510,200,70);
 
         studentButton.setName("student");
         courseButton.setName("course");
         scheduleButton.setName("schedule");
         scoreButton.setName("score");
         logoutButton.setName("logout");
+        passwordButton.setName("changepassword");
 
         studentButton.addActionListener(this);
         courseButton.addActionListener(this);
         scheduleButton.addActionListener(this);
         scoreButton.addActionListener(this);
         logoutButton.addActionListener(this);
+        passwordButton.addActionListener(this);
 
         sideBarPanel.setSize(200,600);
         sideBarPanel.setLocation(0,0);
@@ -63,6 +68,7 @@ public class ContentGUI extends JFrame implements ActionListener  {
         sideBarPanel.add(scheduleButton);
         sideBarPanel.add(scoreButton);
         sideBarPanel.add(logoutButton);
+        sideBarPanel.add(passwordButton);
 
         getContentPane().setLayout(null);
         getContentPane().add(sideBarPanel);
@@ -81,6 +87,7 @@ public class ContentGUI extends JFrame implements ActionListener  {
         scheduleButton.setBackground(Color.WHITE);
         scoreButton.setBackground(Color.WHITE);
         logoutButton.setBackground(Color.WHITE);
+        passwordButton.setBackground(Color.WHITE);
     }
     public void actionPerformed(ActionEvent e){
         JButton b = (JButton)e.getSource();
@@ -129,7 +136,9 @@ public class ContentGUI extends JFrame implements ActionListener  {
 
                 break;
             }
+            case "changepassword":
 
+                break;
         }
     }
 }
